@@ -60,9 +60,11 @@ def signup(request):
                 user.save()
 
                 user_login = auth.authenticate(username, password=password)
-                auth.login.save(request, user_login)
+                if user_login is not None:
+                    auth.login(request, user_login)
+                # auth.login(request, user_login)
 
-                user_model = User.object.get(username=username)
+                user_model = User.objects.get(username=username)
                 new_profile = Profile.objects.create(user=user_model, id_user=user)
                 new_profile.save()
                 return redirect('settings')
