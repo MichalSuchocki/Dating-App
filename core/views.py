@@ -12,6 +12,8 @@ def index(request):
 
 @login_required(login_url='signin')
 def upload(request):
+    user_object = User.objects.get(user_name=request.user.username)
+    user_profile = Profile.objects.get(user=user_object)
     return HttpResponse('<h1>Upload View</h1>')
 
 @login_required(login_url='signin')
