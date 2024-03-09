@@ -52,6 +52,11 @@ def like_post(request):
         return redirect('/')
 
 @login_required(login_url='signin')
+def profile(request, pk):
+    user_object = User.objects.get
+    return render(request, 'profile.html')
+
+@login_required(login_url='signin')
 def settings(request):
     user_profile = Profile.objects.get(user=request.user)
 
