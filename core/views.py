@@ -214,7 +214,7 @@ def signup(request):
                 # auth.login(request, user_login)
 
                 user_model = User.objects.get(username=username)
-                new_profile = Profile.objects.create(user=user_model, id_user=user)
+                new_profile = Profile.objects.create(user=user_model, id_user=user_model.id)
                 new_profile.save()
                 return redirect('settings')
         else:
@@ -237,7 +237,9 @@ def signin(request):
         else:
             messages.info(request, 'Credential Invalid')
             return redirect('signin')
-    return render(request, 'signin.html')
+
+    else:
+        return render(request, 'signin.html')
 
 @login_required(login_url='signin')
 def logout(request):
